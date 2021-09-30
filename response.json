@@ -1,0 +1,14 @@
+{
+    "status": true,
+    "message": "\u062a\u0645\u062a \u0627\u0644\u0625\u0636\u0627\u0641\u0629 \u0628\u0646\u062c\u0627\u062d",
+    "data": {
+        "id": 23847,
+        "product": {
+            "id": 59,
+            "price": 3847.5,
+            "old_price": 4000,
+            "discount": 4,
+            "image": "https:\/\/student.valuxapps.com\/storage\/uploads\/products\/1615451715MqRD4.item_XXL_131956716_5973d6a4ae72f.jpeg"
+        }
+    }
+}

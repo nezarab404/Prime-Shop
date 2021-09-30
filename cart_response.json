@@ -1,0 +1,31 @@
+{
+    "status": true,
+    "message": null,
+    "data": {
+        "cart_items": [
+            {
+                "id": 7046,
+                "quantity": 1,
+                "product": {
+                    "id": 55,
+                    "price": 44500,
+                    "old_price": 44500,
+                    "discount": 0,
+                    "image": "https:\/\/student.valuxapps.com\/storage\/uploads\/products\/1615442168bVx52.item_XXL_36581132_143760083.jpeg",
+                    "name": "Apple MacBook Pro",
+                    "description": "Bring home the Apple MacBook Pro and experience computing like never before. This Apple laptop features a powerful 2.3Ghz 8th Gen-Intel Core i5 processor that makes sure the system keeps performing efficiently. Experience smooth and fast multitasking with the 8GB RAM. The Intel Iris Plus Graphics render images in high-quality and make your gaming experience a pleasing one. The macOS operating system offers various user-friendly features. Store your movies, audios, and other important files comfortably on the 512GB SSD of this device. The 13.3inch display allows you to view your favorite movies and other content in high quality. The Retina display features bright LED backlighting and a high contrast ratio that enhances your viewing experience. The True Tone technology provides a natural viewing experience by adjusting the white balance of the screen as per the color temperature of the light around. Featuring well-balanced, high-fidelity sounds, this laptop delivers an immersive audio experience. The Apple T2 chip lets you store your data in an encrypted format with the help of its Secure Enclave coprocessor. Also, it tightens the security further with the help of the Touch ID. The Touch ID only allows you to unlock your laptop using your fingerprints. The Touch Bar controls simplify various activities such as sending an email or formatting a document. This lightweight laptop can be easily carried around in your backpack. It features a space grey that gives it a distinguished and beautiful look.",
+                    "images": [
+                        "https:\/\/student.valuxapps.com\/storage\/uploads\/products\/1615442168ijV8V.item_XXL_36581132_143760083.jpeg",
+                        "https:\/\/student.valuxapps.com\/storage\/uploads\/products\/161544216881jxI.item_XXL_36581132_143760084.jpeg",
+                        "https:\/\/student.valuxapps.com\/storage\/uploads\/products\/1615442168uZNcz.item_XXL_36581132_143760087.jpeg",
+                        "https:\/\/student.valuxapps.com\/storage\/uploads\/products\/1615442168VnIxG.item_XXL_36581132_143760088.jpeg"
+                    ],
+                    "in_favorites": false,
+                    "in_cart": true
+                }
+            }
+        ],
+        "sub_total": 44500,
+        "total": 44500
+    }
+}
