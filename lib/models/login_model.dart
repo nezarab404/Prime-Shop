@@ -1,14 +1,13 @@
-class LoginData {
-  late bool status;
-  late String message;
+class LoginModel {
+  bool? status;
+  String? message;
   UserData? data;
 
-  LoginData.fromJson(json){
+  LoginModel.fromJson(json) {
     status = json['status'];
     message = json['message'];
-    data = json['data']!=null ? UserData.fromJson(json['data']) :null;
+    data = json['data'] != null ? UserData.fromJson(json['data']) : null;
   }
-
 }
 
 class UserData {

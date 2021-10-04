@@ -5,10 +5,11 @@ import 'package:shopy/models/categories_model.dart';
 import 'package:shopy/models/change_favorites_model.dart';
 import 'package:shopy/models/favorites_model.dart';
 import 'package:shopy/models/home_model.dart';
+import 'package:shopy/models/profile_model.dart';
 import 'package:shopy/screens/categories/categories_screen.dart';
 import 'package:shopy/screens/favorites/favorites_screen.dart';
 import 'package:shopy/screens/products/products_screen.dart';
-import 'package:shopy/screens/settings/setings_screen.dart';
+import 'package:shopy/screens/settings/settings_screen.dart';
 import 'package:shopy/shared/netowrk/constants.dart';
 import 'package:shopy/shared/netowrk/end_points.dart';
 import 'package:shopy/shared/netowrk/remote/dio_helper.dart';
@@ -20,6 +21,8 @@ enum CategoriesDataStatus { loading, success, error }
 enum FavoritesDataStatus { loading, success, error }
 
 enum ChangeFavoritesStatus { loading, success, error }
+enum ProfileDataStatus { success, error, loading }
+
 
 class ShopProvider with ChangeNotifier {
   int currentIndex = 0;
@@ -64,21 +67,23 @@ class ShopProvider with ChangeNotifier {
     shopDataStatus = ShopDataStatus.loading;
     print(shopDataStatus);
 
-    DioHelper.getData(url: HOME, token: token).then((value) {
-      homeModel = HomeModel.fromJson(value.data);
-      shopDataStatus = ShopDataStatus.success;
-      print(shopDataStatus);
-      for (var product in homeModel!.data!.products) {
-        favorites[product.id!] = product.inFavorites!;
-      }
-      print("home : $favorites");
-      notifyListeners();
-    }).catchError((error) {
-      print(error.toString());
-      shopDataStatus = ShopDataStatus.error;
-      print(shopDataStatus);
-      notifyListeners();
-    });
+    
+      DioHelper.getData(url: HOME, token: token).then((value) {
+        homeModel = HomeModel.fromJson(value.data);
+        shopDataStatus = ShopDataStatus.success;
+        print(shopDataStatus);
+        for (var product in homeModel!.data!.products) {
+          favorites[product.id!] = product.inFavorites!;
+        }
+       // print("home : $favorites");
+        notifyListeners();
+      }).catchError((error) {
+        print(error.toString());
+        shopDataStatus = ShopDataStatus.error;
+        print(shopDataStatus);
+        notifyListeners();
+      });
+    
   }
 
   void getCategoriesData() {
@@ -137,6 +142,27 @@ class ShopProvider with ChangeNotifier {
       changeFavoritesStatus = ChangeFavoritesStatus.error;
       notifyListeners();
       print(changeFavoritesStatus);
+    });
+  }
+
+
+ProfileDataStatus? profileDataStatus;
+  ProfileModel? profileModel;
+
+  void getProfileData() {
+    profileDataStatus = ProfileDataStatus.loading;
+    print(profileDataStatus);
+    DioHelper.getData(url: PROFILE, token: token).then((value) {
+      profileModel = ProfileModel.fromJson(value.data);
+      print(value.data);
+      profileDataStatus = ProfileDataStatus.success;
+      print(profileDataStatus);
+      notifyListeners();
+    }).catchError((error) {
+      profileDataStatus = ProfileDataStatus.error;
+      print(profileDataStatus);
+      print(error);
+      notifyListeners();
     });
   }
 

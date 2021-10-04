@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopy/providers/network_provider.dart';
@@ -19,6 +21,16 @@ void main() async {
   //SharedHelper.saveData(key: ONBOARDING, value: false);
   Widget widget;
   // Provider.debugCheckInvalidValueType = null;
+
+
+//  This should be used while in development mode,
+// do NOT do this when you want to release to production,
+// the aim of this answer is to make the development a bit easier for you,
+// for production, you need to fix your certificate issue and use it properly,
+// look at the other answers for this as it might be helpful for your case.
+  HttpOverrides.global = MyHttpOverrides();
+
+
 
   bool? onBoarding = SharedHelper.getData(key: ONBOARDING);
   token = SharedHelper.getData(key: TOKEN);
@@ -51,8 +63,8 @@ class MyApp extends StatelessWidget {
         create: (_) => ShopProvider()
           ..getHomeData()
           ..getCategoriesData()
-          ..getFavoritesData(),
-        child: MaterialApp(
+          ..getFavoritesData()..getProfileData(),
+        child:MaterialApp(
           title: 'Shopy',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
@@ -62,5 +74,14 @@ class MyApp extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+
+ class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
   }
 }

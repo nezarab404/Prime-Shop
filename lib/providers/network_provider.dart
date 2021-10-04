@@ -21,7 +21,7 @@ class NetworkProvider with ChangeNotifier {
   Status _signUpStatus = Status.notRegistered;
 
   Response? loginResponse; //useless
-  LoginData? loginData;
+  LoginModel? loginModel;
 
   Status get loggedInStatus => _loggedInStatus;
 
@@ -47,12 +47,12 @@ class NetworkProvider with ChangeNotifier {
       print(value);
       print(_loggedInStatus);
       loginResponse = value; //useless
-      loginData = LoginData.fromJson(value.data);
+      loginModel = LoginModel.fromJson(value.data);
       print(value.data['status']);
       if (value.data['status']) {
         loggedInStatus = Status.loggenIn;
-        if (loginData!.data != null) {
-          print("token : ${loginData!.data!.token}");
+        if (loginModel!.data != null) {
+          print("token : ${loginModel!.data!.token}");
         }
       } else {
         loggedInStatus = Status.notLoggedIn;

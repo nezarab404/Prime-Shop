@@ -91,18 +91,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                 print(provider.loggedInStatus);
                                 if (provider.loggedInStatus ==
                                     Status.loggenIn) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                          content:
-                                              Text(provider.loginData!.message),
-                                          backgroundColor: Colors.green));
+                                  // ScaffoldMessenger.of(context).showSnackBar(
+                                  //     SnackBar(
+                                  //         content:
+                                  //             Text(provider.loginData!.message),
+                                  //         backgroundColor: Colors.green));
 
                                   print("success");
 
                                   SharedHelper.saveData(
                                           key: TOKEN,
                                           value:
-                                              provider.loginData!.data!.token)
+                                              provider.loginModel!.data!.token)
                                       .then((value) {
                                     
                                     Navigator.pushReplacement(
@@ -115,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 } else {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(SnackBar(
-                                    content: Text(provider.loginData!.message),
+                                    content: Text(provider.loginModel!.message!),
                                     backgroundColor: Colors.red,
                                   ));
                                   print("not succsess");

@@ -22,6 +22,14 @@ class ShopLayout extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
+              
+            },
+            icon: const Icon(Icons.shopping_cart),
+            color: Colors.indigo,
+            highlightColor: Colors.indigoAccent,
+          ),
+          IconButton(
+            onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const SearchScreen()));
             },
