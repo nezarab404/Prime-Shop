@@ -7,7 +7,6 @@ import 'package:shopy/screens/shop%20layout/shop_layout.dart';
 import 'package:shopy/shared/componenst/components.dart';
 import 'package:shopy/shared/netowrk/keys.dart';
 import 'package:shopy/shared/netowrk/local/shared_helper.dart';
-// import 'package:shopy/shared/componenst/validator.dart';
 import '../register/signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {

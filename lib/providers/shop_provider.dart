@@ -23,7 +23,6 @@ enum FavoritesDataStatus { loading, success, error }
 enum ChangeFavoritesStatus { loading, success, error }
 enum ProfileDataStatus { success, error, loading }
 
-
 class ShopProvider with ChangeNotifier {
   int currentIndex = 0;
 
@@ -31,18 +30,25 @@ class ShopProvider with ChangeNotifier {
   CategoriesModel? categoriesModel;
   FavoritesModel? favoritesModel;
   ChangeFavoritesModel? changeFavoritesModel;
+  ProfileModel? profileModel;
 
   ShopDataStatus? shopDataStatus;
   CategoriesDataStatus? categoriesDataStatus;
   FavoritesDataStatus? favoritesDataStatus;
   ChangeFavoritesStatus? changeFavoritesStatus;
+  ProfileDataStatus? profileDataStatus;
 
   Map<int, bool> favorites = {};
+  bool switchVal = false;
+  void changeSwitch(bool value) {
+    switchVal = value;
+    notifyListeners();
+  }
 
   List<Widget> bottomScreens = [
     const ProductsScreen(),
-    const CategoriesScreen(),
     const FavoritesScreen(),
+    const CategoriesScreen(),
     const SettingsScreen()
   ];
 
@@ -67,23 +73,21 @@ class ShopProvider with ChangeNotifier {
     shopDataStatus = ShopDataStatus.loading;
     print(shopDataStatus);
 
-    
-      DioHelper.getData(url: HOME, token: token).then((value) {
-        homeModel = HomeModel.fromJson(value.data);
-        shopDataStatus = ShopDataStatus.success;
-        print(shopDataStatus);
-        for (var product in homeModel!.data!.products) {
-          favorites[product.id!] = product.inFavorites!;
-        }
-       // print("home : $favorites");
-        notifyListeners();
-      }).catchError((error) {
-        print(error.toString());
-        shopDataStatus = ShopDataStatus.error;
-        print(shopDataStatus);
-        notifyListeners();
-      });
-    
+    DioHelper.getData(url: HOME, token: token).then((value) {
+      homeModel = HomeModel.fromJson(value.data);
+      shopDataStatus = ShopDataStatus.success;
+      print(shopDataStatus);
+      for (var product in homeModel!.data!.products) {
+        favorites[product.id!] = product.inFavorites!;
+      }
+      // print("home : $favorites");
+      notifyListeners();
+    }).catchError((error) {
+      print(error.toString());
+      shopDataStatus = ShopDataStatus.error;
+      print(shopDataStatus);
+      notifyListeners();
+    });
   }
 
   void getCategoriesData() {
@@ -145,10 +149,6 @@ class ShopProvider with ChangeNotifier {
     });
   }
 
-
-ProfileDataStatus? profileDataStatus;
-  ProfileModel? profileModel;
-
   void getProfileData() {
     profileDataStatus = ProfileDataStatus.loading;
     print(profileDataStatus);
@@ -165,5 +165,4 @@ ProfileDataStatus? profileDataStatus;
       notifyListeners();
     });
   }
-
 }

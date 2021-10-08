@@ -22,14 +22,6 @@ class ShopLayout extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              
-            },
-            icon: const Icon(Icons.shopping_cart),
-            color: Colors.indigo,
-            highlightColor: Colors.indigoAccent,
-          ),
-          IconButton(
-            onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (_) => const SearchScreen()));
             },
@@ -56,8 +48,8 @@ class ShopLayout extends StatelessWidget {
       },
       items: [
         buildBottomIcon(provider, Icons.home, 0, "Home"),
-        buildBottomIcon(provider, Icons.category, 1, "Categories"),
-        buildBottomIcon(provider, Icons.favorite, 2, "Favorite"),
+        buildBottomIcon(provider, Icons.favorite, 1, "Favorite"),
+        buildBottomIcon(provider, Icons.shopping_cart, 2, "Categories"),
         buildBottomIcon(provider, Icons.settings, 3, "Settings"),
       ],
     );

@@ -95,14 +95,14 @@ class ProductsScreen extends StatelessWidget {
                     height: 10,
                   ),
                   SizedBox(
-                    height: 100,
+                    height: 75,
                     child: ListView.separated(
                       physics: const BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) =>
                           categoriesListItem(categoriesModel.data!.data[index]),
                       separatorBuilder: (context, index) => const SizedBox(
-                        width: 20,
+                        width: 15,
                       ),
                       itemCount: categoriesModel.data!.data.length,
                     ),
@@ -238,14 +238,15 @@ class ProductsScreen extends StatelessWidget {
                       : Colors.black,
                 ),
               ),
-
             ],
           ),
           Center(
             child: ElevatedButton(
               onPressed: () {},
-              child: const Text("Add To Cart",
-                  style: TextStyle(color: Colors.white),),
+              child: const Text(
+                "Add To Cart",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
         ],
@@ -269,8 +270,8 @@ class ProductsScreen extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(90),
       child: Container(
-        height: 100,
-        width: 100,
+        height: 75,
+        width: 75,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(90),
         ),
@@ -278,8 +279,8 @@ class ProductsScreen extends StatelessWidget {
           children: [
             Image(
               image: NetworkImage(model.image!),
-              height: 100,
-              width: 100,
+              height: 75,
+              width: 75,
               fit: BoxFit.fill,
             ),
             Container(
