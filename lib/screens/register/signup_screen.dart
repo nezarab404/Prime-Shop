@@ -1,6 +1,14 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopy/providers/network_provider.dart';
+import 'package:shopy/screens/shop%20layout/shop_layout.dart';
 import 'package:shopy/shared/componenst/components.dart';
 import 'package:shopy/shared/componenst/validator.dart';
+import 'package:shopy/shared/netowrk/constants.dart';
+import 'package:shopy/shared/netowrk/keys.dart';
+import 'package:shopy/shared/netowrk/local/shared_helper.dart';
 import '../login/login_screen.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -20,6 +28,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<NetworkProvider>(context);
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -84,33 +94,69 @@ class _SignupScreenState extends State<SignupScreen> {
                         icon: Icons.lock,
                         validator: (val) => Validator.passwordValidator(val)),
                     MyTextField(
-                      controller: _phone,
-                      label: "Phone Number",
-                      hint: "Enter your phone number",
-                      icon: Icons.phone,
-                      validator: (val)=> Validator.phoneValidator(val)
-                    ),
-                    Container(
-                      padding: const EdgeInsets.only(
-                        top: 20,
-                      ),
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          shape: const StadiumBorder(),
+                        controller: _phone,
+                        label: "Phone Number",
+                        hint: "Enter your phone number",
+                        icon: Icons.phone,
+                        validator: (val) => Validator.phoneValidator(val)),
+                    if (provider.signUpStatus == Status.registering)
+                      const Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: Center(child: CircularProgressIndicator()),
+                      )
+                    else
+                      Container(
+                        padding: const EdgeInsets.only(
+                          top: 20,
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.all(15),
-                          child: Text(
-                            "Create Account",
-                            style: TextStyle(
-                              fontSize: 20,
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            var name = _firstName.text + " " + _lastName.text;
+                           await Provider.of<NetworkProvider>(context, listen: false)
+                                .userRegister(
+                              name: name,
+                              email: _email.text,
+                              password: _password.text,
+                              phone: _phone.text,
+                            )
+                                .then((value) {
+                              print(provider.signUpStatus);
+                              if (provider.signUpStatus == Status.regesterd) {
+                                print("success");
+                                SharedHelper.saveData(key: TOKEN, value: token)
+                                    .then((value) {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => const ShopLayout(),
+                                    ),
+                                  );
+                                });
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  content: Text(provider.registerModel!.message!),
+                                  backgroundColor: Colors.red,
+                                ));
+                                print("not succsess");
+                              }
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: const StadiumBorder(),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.all(15),
+                            child: Text(
+                              "Create Account",
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

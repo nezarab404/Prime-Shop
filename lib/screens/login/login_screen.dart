@@ -77,7 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () async {
+                          onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               print("click");
                               Provider.of<NetworkProvider>(context,

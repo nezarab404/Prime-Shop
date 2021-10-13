@@ -69,6 +69,21 @@ class _MyTextFieldState extends State<MyTextField> {
   }
 }
 
+// class CachedImage extends StatelessWidget {
+//  final String url;
+//  const CachedImage(this.url,{ Key? key }) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return CachedNetworkImage(
+//       imageUrl: url,
+//       placeholder: (ctx,url)=>const CircularProgressIndicator(),
+//       errorWidget: (ctx,url,error)=>const Icon(Icons.error),
+//     );
+//   }
+// }
+
+
 // showToast(
 //     {required BuildContext context,
 //     required String msg,
