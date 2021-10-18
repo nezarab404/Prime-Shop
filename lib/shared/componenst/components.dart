@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 // import 'package:toast/toast.dart';
 
 class MyTextField extends StatefulWidget {
@@ -10,16 +11,16 @@ class MyTextField extends StatefulWidget {
   final IconData? icon;
   final bool hasIcon;
 
-  const MyTextField({
-    Key? key,
-    required this.controller,
-    this.hint,
-    this.label,
-    this.validator,
-    this.isPassword = false,
-    this.icon,
-    this.hasIcon = true,
-  }) : super(key: key);
+ const MyTextField(
+      {Key? key,
+      required this.controller,
+      this.hint,
+      this.label,
+      this.validator,
+      this.isPassword = false,
+      this.icon,
+      this.hasIcon = true })
+      : super(key: key);
 
   @override
   State<MyTextField> createState() => _MyTextFieldState();
@@ -34,6 +35,7 @@ class _MyTextFieldState extends State<MyTextField> {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: TextFormField(
+      
         controller: widget.controller,
         validator: widget.validator,
         obscureText: widget.isPassword ? visibility : false,
@@ -68,6 +70,8 @@ class _MyTextFieldState extends State<MyTextField> {
     );
   }
 }
+
+
 
 // class CachedImage extends StatelessWidget {
 //  final String url;

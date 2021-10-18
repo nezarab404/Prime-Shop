@@ -23,7 +23,7 @@ class ShopLayout extends StatelessWidget {
           IconButton(
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (_) => const SearchScreen()));
+                  MaterialPageRoute(builder: (_) =>  SearchScreen()));
             },
             icon: const Icon(Icons.search),
             color: Colors.indigo,

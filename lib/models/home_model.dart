@@ -43,6 +43,7 @@ class ProductModel {
   String? image;
   String? name;
   String? description;
+  List<String> images = [];
   bool? inFavorites;
   bool? inCart;
 
@@ -54,6 +55,10 @@ class ProductModel {
     image = json['image'];
     name = json['name'];
     description = json['description'];
+    if(json['images']!=null){
+    json['images'].forEach((element) {
+      images.add(element);
+    });}
     inFavorites = json['in_favorites'];
     inCart = json['in_cart'];
   }

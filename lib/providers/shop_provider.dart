@@ -53,9 +53,9 @@ class ShopProvider with ChangeNotifier {
   ];
 
   List<String> appBarTitles = [
-    "Nezar Shop",
-    "Categories",
+    "My Shop",
     "Favorites",
+    "Categories",
     "Settings"
   ];
 
@@ -154,7 +154,6 @@ class ShopProvider with ChangeNotifier {
     print(profileDataStatus);
     DioHelper.getData(url: PROFILE, token: token).then((value) {
       profileModel = ProfileModel.fromJson(value.data);
-      print(value.data);
       profileDataStatus = ProfileDataStatus.success;
       print(profileDataStatus);
       notifyListeners();

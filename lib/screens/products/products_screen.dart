@@ -70,46 +70,46 @@ class ProductsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      const Text(
-                        "Categories",
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          provider.changeBottom(1);
-                        },
-                        icon: const Icon(
-                          Icons.arrow_forward_ios,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                    height: 75,
-                    child: ListView.separated(
-                      physics: const BouncingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) =>
-                          categoriesListItem(categoriesModel.data!.data[index]),
-                      separatorBuilder: (context, index) => const SizedBox(
-                        width: 15,
-                      ),
-                      itemCount: categoriesModel.data!.data.length,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   // ignore: prefer_const_literals_to_create_immutables
+                  //   children: [
+                  //     const Text(
+                  //       "Categories",
+                  //       style: TextStyle(
+                  //         fontSize: 25,
+                  //         fontWeight: FontWeight.w800,
+                  //       ),
+                  //     ),
+                  //     IconButton(
+                  //       onPressed: () {
+                  //         provider.changeBottom(1);
+                  //       },
+                  //       icon: const Icon(
+                  //         Icons.arrow_forward_ios,
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // const SizedBox(
+                  //   height: 10,
+                  // ),
+                  // SizedBox(
+                  //   height: 75,
+                  //   child: ListView.separated(
+                  //     physics: const BouncingScrollPhysics(),
+                  //     scrollDirection: Axis.horizontal,
+                  //     itemBuilder: (context, index) =>
+                  //         categoriesListItem(categoriesModel.data!.data[index]),
+                  //     separatorBuilder: (context, index) => const SizedBox(
+                  //       width: 15,
+                  //     ),
+                  //     itemCount: categoriesModel.data!.data.length,
+                  //   ),
+                  // ),
+                  // const SizedBox(
+                  //   height: 20,
+                  // ),
                   const Text(
                     "New Products",
                     style: TextStyle(
@@ -129,14 +129,15 @@ class ProductsScreen extends StatelessWidget {
                 crossAxisCount: 2,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                childAspectRatio: 1 / 1.98,
+                childAspectRatio: 1 / 1.7,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
-                children: List.generate(
-                  homeModel.data!.products.length,
-                  (index) => buildGridItem(
-                      homeModel.data!.products[index], provider, context),
-                ),
+                children: List.generate(homeModel.data!.products.length,
+                    (index) => koko(homeModel.data!.products[index], context)
+
+                    // buildGridItem(
+                    //     homeModel.data!.products[index], provider, context),
+                    ),
               ),
             ),
           ],
@@ -240,15 +241,15 @@ class ProductsScreen extends StatelessWidget {
               ),
             ],
           ),
-          Center(
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text(
-                "Add To Cart",
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
+          // Center(
+          //   child: ElevatedButton(
+          //     onPressed: () {},
+          //     child: const Text(
+          //       "Add To Cart",
+          //       style: TextStyle(color: Colors.white),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
@@ -300,6 +301,104 @@ class ProductsScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget koko(ProductModel product, BuildContext context) {
+    var provider = Provider.of<ShopProvider>(context);
+    return Container(
+        decoration: BoxDecoration(
+          border: Border.all(width: 1, color: Colors.indigo),
+          borderRadius: BorderRadius.circular(30),
+          color: Colors.white,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Stack(
+                alignment: AlignmentDirectional.topStart,
+                children: [
+                  SizedBox(
+                    height: 180,
+                    width: double.infinity,
+                    child: Image.network(
+                      product.image!,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                  if (product.discount != 0)
+                    Padding(
+                      padding: const EdgeInsets.all(0.0),
+                      child: SizedBox(
+                        height: 50,
+                        width: 50,
+                        child: Image.asset("assets/images/discount1.png"),
+                      ),
+                    )
+                ],
+              ),
+              Text(
+                product.name!,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style:
+                    const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "${(product.price * 0.063653571).round()}\$",
+                    // convert from EGP to USD
+                    style: const TextStyle(
+                      color: Colors.orange,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  if (product.discount != 0)
+                    Text(
+                      "${(product.oldPrice * 0.063653571).round()} \$",
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 10,
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                    ),
+                  CircleAvatar(
+                    backgroundColor: provider.favorites[product.id] ?? false
+                        ? Colors.indigo
+                        : Colors.orange[150],
+                    child: IconButton(
+                      onPressed: () {
+                        provider.changeFavorites(product.id!)?.then((value) {
+                          print(provider.changeFavoritesStatus);
+                          if (provider.changeFavoritesStatus ==
+                              ChangeFavoritesStatus.error) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text(
+                                    provider.changeFavoritesModel!.message!),
+                                backgroundColor: Colors.red));
+                          }
+                        });
+                      },
+                      icon: Icon(
+                        provider.favorites[product.id] ?? false
+                            ? Icons.shopping_cart
+                            : Icons.shopping_cart_outlined,
+                      ),
+                      iconSize: 18,
+                      color: provider.favorites[product.id] ?? false
+                          ? Colors.white
+                          : Colors.black,
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ));
   }
 }
 //178.22.122.100, 178.51.200.2
