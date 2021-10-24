@@ -37,7 +37,7 @@ class SearchScreen extends StatelessWidget {
                 children: [
                   TextField(
                     controller: _search,
-                    onSubmitted: (text) {
+                    onChanged: (text) {
                       provider.searchProduct(text);
                     },
                     decoration: InputDecoration(
